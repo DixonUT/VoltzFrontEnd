@@ -1,0 +1,40 @@
+.order-history-container {
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .order-details {
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 20px;
+  }
+  
+  .order-details h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .order-details p {
+    margin: 0;
+  }
+  
+  .order-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .order-items-table th,
+  .order-items-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .order-items-table th {
+    background-color: #f2f2f2;
+  }
+  
