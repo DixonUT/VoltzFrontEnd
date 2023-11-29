@@ -7,6 +7,7 @@ const OrderHistory = () => {
   const { isAuthenticated } = useAuth();
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
+  const serverhost = import.meta.env.VITE_SERVERHOST;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -18,7 +19,7 @@ const OrderHistory = () => {
 
   const fetchOrderHistory = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/checkout-history", {
+      const response = await fetch(`${serverhost}/api/checkout-history`, {
         headers: {
           Authorization: localStorage.getItem("token") || "",
         },
@@ -27,6 +28,7 @@ const OrderHistory = () => {
       if (response.ok) {
         const data = await response.json();
         setOrders(data);
+        console.log(data)
       } else {
         console.error("Error fetching order history:", response.statusText);
       }
