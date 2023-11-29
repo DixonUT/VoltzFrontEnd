@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import React from "react";
 
 const AuthContext = createContext();
+const serverhost = import.meta.env.VITE_SERVERHOST;
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -55,7 +56,7 @@ export const AuthProvider = ({ children }) => {
   };
   const fetchUserProfile = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/profile", {
+      const response = await fetch(`${serverhost}/api/profile`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

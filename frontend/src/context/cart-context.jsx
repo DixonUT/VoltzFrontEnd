@@ -5,6 +5,7 @@ import { useAuth } from "./auth-content";
 const CART_STORAGE_KEY = "cartItems";
 
 const CartContext = createContext();
+const serverhost = import.meta.env.VITE_SERVERHOST;
 
 export const useCart = () => useContext(CartContext);
 
@@ -52,16 +53,19 @@ export const CartProvider = ({ children }) => {
   };
 
   const checkout = async () => {
-    try {
+    try { 
+      console.log(JSON.stringify(cartItems))
+
       const response = await fetch("http://localhost:8080/api/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: localStorage.getItem("token") || "",
+          authorization: "Bearer " + localStorage.getItem("token") || "",
         },
-        body: JSON.stringify(cartItems),
+        body: JSON.stringify({cartItems}),
       });
-
+const datathing = await response.json();
+console.log(datathing)
       if (response.ok) {
         setCartItems([]);
         toast("Purchase successful!", { type: "success" });
@@ -101,7 +105,7 @@ export const CartProvider = ({ children }) => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8080/api/cart", {
+      const response = await fetch(`${serverhost}/api/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
