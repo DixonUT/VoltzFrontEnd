@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+const serverhost = import.meta.env.VITE_SERVERHOST;
 
 const UserTableRow = ({ user, onUpdate, onDelete, onToggleAdmin }) => {
   const [isEditing, setEditing] = useState(false);
@@ -100,7 +101,7 @@ const UserList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/admin/users", {
+    fetch(`${serverhost}/api/admin/users`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -111,7 +112,7 @@ const UserList = () => {
   }, []);
 
   const handleUpdate = (data) => {
-    fetch(`http://localhost:8080/api/admin/users/${data.id}`, {
+    fetch(`${serverhost}/api/admin/users/${data.id}`, {
       method: "PATCH",
       body: JSON.stringify(data),
       headers: {
@@ -129,7 +130,7 @@ const UserList = () => {
   };
 
   const handleDelete = (userId) => {
-    fetch(`http://localhost:8080/api/admin/users/${userId}`, {
+    fetch(`${serverhost}/api/admin/users/${userId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

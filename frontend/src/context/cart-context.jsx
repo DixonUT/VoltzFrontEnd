@@ -56,7 +56,7 @@ export const CartProvider = ({ children }) => {
     try { 
       console.log(JSON.stringify(cartItems))
 
-      const response = await fetch("http://localhost:8080/api/checkout", {
+      const response = await fetch(`${serverhost}/api/checkout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -124,7 +124,7 @@ console.log(datathing)
   };
   const fetchSavedCart = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/cart", {
+      const response = await fetch(`${serverhost}/api/cart`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

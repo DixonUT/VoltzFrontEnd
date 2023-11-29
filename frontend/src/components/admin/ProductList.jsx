@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+const serverhost = import.meta.env.VITE_SERVERHOST;
 
 const ProductTableRow = ({ product, onUpdate, onDelete }) => {
   const [isEditing, setEditing] = useState(false);
@@ -118,7 +119,7 @@ const productList = () => {
 
   useEffect(() => {
     // Fetch products from the API
-    fetch("http://localhost:8080/api/products")
+    fetch(`${serverhost}/api/products`)
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch(() => toast("Error fetching products: ", { type: "error" }));
@@ -126,7 +127,7 @@ const productList = () => {
 
   const handleUpdate = (data) => {
     // Update product data in the API
-    fetch(`http://localhost:8080/api/admin/product/${data.id}`, {
+    fetch(`${serverhost}/api/admin/product/${data.id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -146,7 +147,7 @@ const productList = () => {
 
   const handleDelete = (productId) => {
     // Delete product from the API
-    fetch(`http://localhost:8080/api/admin/product/${productId}`, {
+    fetch(`${serverhost}/api/admin/product/${productId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

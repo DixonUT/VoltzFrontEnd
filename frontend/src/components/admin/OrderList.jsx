@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+const serverhost = import.meta.env.VITE_SERVERHOST;
 
 const OrderTableRow = ({ order, onUpdateStatus }) => {
   const [isEditing, setEditing] = useState(false);
@@ -50,7 +51,7 @@ const OrderList = () => {
 
   useEffect(() => {
     // Fetch orders from the API
-    fetch("http://localhost:8080/api/admin/orders", {
+    fetch(`${serverhost}/api/admin/orders`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -62,7 +63,7 @@ const OrderList = () => {
 
   const handleUpdateStatus = (orderId, newStatus) => {
     // Update order status in the API
-    fetch(`http://localhost:8080/api/admin/orders/${orderId}`, {
+    fetch(`${serverhost}/api/admin/orders/${orderId}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

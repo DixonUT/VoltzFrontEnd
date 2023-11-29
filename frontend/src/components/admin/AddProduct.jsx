@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+const serverhost = import.meta.env.VITE_SERVERHOST;
 
 const AddProductForm = () => {
   const [newProduct, setNewProduct] = useState({
@@ -24,7 +25,7 @@ const AddProductForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/api/admin/product", {
+      const response = await fetch(`${serverhost}/api/admin/product`, {
         body: JSON.stringify(newProduct),
         method:"POST",
         headers: {

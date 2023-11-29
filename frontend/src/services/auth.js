@@ -1,6 +1,7 @@
 // authService.js
+const serverhost = import.meta.env.VITE_SERVERHOST;
 
-const apiUrl = 'http://localhost:8080/api/auth';
+const apiUrl = `${serverhost}/api/auth`;
 
 export const AuthService = {
     login: async (username, password) => {
